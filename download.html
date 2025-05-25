@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Wallpaper - WallpaperHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .download-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .download-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 0.6s ease;
+        }
+        
+        .download-header {
+            margin-bottom: 2rem;
+        }
+        
+        .download-header i {
+            font-size: 4rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .download-header h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .download-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .wallpaper-preview-large {
+            width: 100%;
+            height: 200px;
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .wallpaper-details {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .detail-value {
+            color: #666;
+        }
+        
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .download-btn-large {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .download-btn-large:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid #c3e6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .download-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .download-btn-large {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="download-page">
+        <div class="download-container">
+            <div class="download-header">
+                <i class="fas fa-download"></i>
+                <h1>Download Your Wallpaper</h1>
+                <p>Your exclusive wallpaper is ready for download</p>
+            </div>
+            
+            <div id="downloadContent">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Sample wallpaper data (same as in main script)
+        const wallpapers = [
+            {
+                id: 1,
+                title: "Abstract Waves",
+                description: "Beautiful abstract wave patterns in vibrant colors",
+                resolution: "4K (3840x2160)",
+                category: "Abstract",
+                gradient: "linear-gradient(45deg, #667eea, #764ba2)",
+                fileSize: "2.4 MB",
+                format: "PNG"
+            },
+            {
+                id: 2,
+                title: "Mountain Sunset",
+                description: "Stunning mountain landscape at golden hour",
+                resolution: "4K (3840x2160)",
+                category: "Nature",
+                gradient: "linear-gradient(45deg, #ff9a9e, #fecfef)",
+                fileSize: "3.1 MB",
+                format: "PNG"
+            },
+            {
+                id: 3,
+                title: "Ocean Depths",
+                description: "Deep blue ocean with light rays penetrating",
+                resolution: "4K (3840x2160)",
+                category: "Nature",
+                gradient: "linear-gradient(45deg, #a8edea, #fed6e3)",
+                fileSize: "2.8 MB",
+                format: "PNG"
+            },
+            {
+                id: 4,
+                title: "City Lights",
+                description: "Urban nightscape with neon reflections",
+                resolution: "4K (3840x2160)",
+                category: "Urban",
+                gradient: "linear-gradient(45deg, #ffecd2, #fcb69f)",
+                fileSize: "3.5 MB",
+                format: "PNG"
+            },
+            {
+                id: 5,
+                title: "Forest Path",
+                description: "Mystical forest path with morning mist",
+                resolution: "4K (3840x2160)",
+                category: "Nature",
+                gradient: "linear-gradient(45deg, #a8e6cf, #dcedc1)",
+                fileSize: "2.9 MB",
+                format: "PNG"
+            },
+            {
+                id: 6,
+                title: "Space Nebula",
+                description: "Colorful nebula in deep space",
+                resolution: "4K (3840x2160)",
+                category: "Space",
+                gradient: "linear-gradient(45deg, #667eea, #764ba2)",
+                fileSize: "3.2 MB",
+                format: "PNG"
+            }
+        ];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const wallpaperId = parseInt(urlParams.get('id'));
+            const token = urlParams.get('token');
+            
+            if (!wallpaperId || !token) {
+                showError('Invalid download link. Please request a new download link from the main page.');
+                return;
+            }
+            
+            const wallpaper = wallpapers.find(w => w.id === wallpaperId);
+            
+            if (!wallpaper) {
+                showError('Wallpaper not found. Please request a new download link from the main page.');
+                return;
+            }
+            
+            showDownloadPage(wallpaper);
+        });
+        
+        function showDownloadPage(wallpaper) {
+            const content = document.getElementById('downloadContent');
+            content.innerHTML = `
+                <div class="wallpaper-preview-large" style="background: ${wallpaper.gradient}">
+                    <i class="fas fa-image" style="opacity: 0.7;"></i>
+                </div>
+                
+                <div class="wallpaper-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Title:</span>
+                        <span class="detail-value">${wallpaper.title}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Description:</span>
+                        <span class="detail-value">${wallpaper.description}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Resolution:</span>
+                        <span class="detail-value">${wallpaper.resolution}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Category:</span>
+                        <span class="detail-value">${wallpaper.category}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">File Size:</span>
+                        <span class="detail-value">${wallpaper.fileSize}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Format:</span>
+                        <span class="detail-value">${wallpaper.format}</span>
+                    </div>
+                </div>
+                
+                <div class="download-buttons">
+                    <a href="#" class="download-btn-large" onclick="downloadWallpaper(${wallpaper.id})">
+                        <i class="fas fa-download"></i>
+                        Download Wallpaper
+                    </a>
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Gallery
+                    </a>
+                </div>
+                
+                <div class="success-message" style="display: none;" id="downloadSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    Download started successfully! The wallpaper should begin downloading shortly.
+                </div>
+            `;
+        }
+        
+        function showError(message) {
+            const content = document.getElementById('downloadContent');
+            content.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    ${message}
+                </div>
+                <div class="download-buttons">
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Gallery
+                    </a>
+                </div>
+            `;
+        }
+        
+        function downloadWallpaper(wallpaperId) {
+            const wallpaper = wallpapers.find(w => w.id === wallpaperId);
+            
+            if (!wallpaper) {
+                alert('Wallpaper not found!');
+                return;
+            }
+            
+            // Create a canvas to generate the wallpaper
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to 4K
+            canvas.width = 3840;
+            canvas.height = 2160;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            
+            // Parse gradient colors from CSS gradient string
+            const gradientMatch = wallpaper.gradient.match(/linear-gradient\(45deg,\s*(#[a-fA-F0-9]{6}),\s*(#[a-fA-F0-9]{6})\)/);
+            if (gradientMatch) {
+                gradient.addColorStop(0, gradientMatch[1]);
+                gradient.addColorStop(1, gradientMatch[2]);
+            } else {
+                gradient.addColorStop(0, '#667eea');
+                gradient.addColorStop(1, '#764ba2');
+            }
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add some decorative elements
+            ctx.globalAlpha = 0.1;
+            for (let i = 0; i < 50; i++) {
+                ctx.beginPath();
+                ctx.arc(
+                    Math.random() * canvas.width,
+                    Math.random() * canvas.height,
+                    Math.random() * 100 + 50,
+                    0,
+                    2 * Math.PI
+                );
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+            
+            // Add title text
+            ctx.globalAlpha = 0.8;
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 120px Inter, Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(wallpaper.title, canvas.width / 2, canvas.height / 2);
+            
+            // Convert canvas to blob and download
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${wallpaper.title.replace(/\s+/g, '_')}_4K.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // Show success message
+                const successMsg = document.getElementById('downloadSuccess');
+                if (successMsg) {
+                    successMsg.style.display = 'block';
+                }
+                
+                // Track download
+                trackDownload(wallpaperId);
+            }, 'image/png');
+        }
+        
+        function trackDownload(wallpaperId) {
+            // In a real application, this would send data to a server
+            const downloadRecord = {
+                wallpaperId: wallpaperId,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                ip: 'client-side' // Would be captured server-side
+            };
+            
+            // Store in localStorage for admin view
+            let downloads = JSON.parse(localStorage.getItem('actualDownloads')) || [];
+            downloads.push(downloadRecord);
+            localStorage.setItem('actualDownloads', JSON.stringify(downloads));
+        }
+    </script>
+</body>
+</html>

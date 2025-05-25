@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallpaperHub - Free Premium Wallpapers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <i class="fas fa-image"></i>
+                <span>WallpaperHub</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="admin.html" class="nav-link admin-link">Admin</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="gradient-text">Premium Wallpapers</span>
+                <br>For Your Devices
+            </h1>
+            <p class="hero-subtitle">Discover stunning high-quality wallpapers, completely free. Just enter your email to get instant access to our exclusive collection.</p>
+            <a href="#gallery" class="cta-button">
+                <span>Explore Gallery</span>
+                <i class="fas fa-arrow-down"></i>
+            </a>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-cards">
+                <div class="card card-1"></div>
+                <div class="card card-2"></div>
+                <div class="card card-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Featured Wallpapers</h2>
+            <p class="section-subtitle">Click on any wallpaper to get your download link via email</p>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Wallpapers will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-envelope"></i>
+                <h3>Get Your Download Link</h3>
+                <p>Enter your email to receive the download link for this wallpaper</p>
+            </div>
+            <form id="emailForm" class="email-form">
+                <div class="form-group">
+                    <input type="email" id="userEmail" placeholder="Enter your email address" required>
+                    <label for="userEmail">Email Address</label>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span>Send Download Link</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+            <div class="selected-wallpaper" id="selectedWallpaper">
+                <!-- Selected wallpaper preview will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="modal">
+        <div class="modal-content preview-modal">
+            <span class="close preview-close">&times;</span>
+            <div class="modal-header">
+                <i class="fas fa-eye"></i>
+                <h3>Wallpaper Preview</h3>
+                <p>See how this wallpaper looks on different devices</p>
+            </div>
+            <div class="preview-container">
+                <div class="device-tabs">
+                    <button class="device-tab active" data-device="desktop">
+                        <i class="fas fa-desktop"></i>
+                        Desktop
+                    </button>
+                    <button class="device-tab" data-device="laptop">
+                        <i class="fas fa-laptop"></i>
+                        Laptop
+                    </button>
+                    <button class="device-tab" data-device="mobile">
+                        <i class="fas fa-mobile-alt"></i>
+                        Mobile
+                    </button>
+                </div>
+                <div class="device-preview">
+                    <div class="device-frame desktop-frame active" id="desktopFrame">
+                        <div class="device-screen" id="desktopScreen"></div>
+                    </div>
+                    <div class="device-frame laptop-frame" id="laptopFrame">
+                        <div class="device-screen" id="laptopScreen"></div>
+                    </div>
+                    <div class="device-frame mobile-frame" id="mobileFrame">
+                        <div class="device-screen" id="mobileScreen"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-actions">
+                <button class="preview-download-btn" id="previewDownloadBtn">
+                    <i class="fas fa-download"></i>
+                    Get This Wallpaper
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success">
+            <span class="close success-close">&times;</span>
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Download Ready!</h3>
+            <p>Your wallpaper is ready for download and we've also sent the link to your email.</p>
+            <div class="download-options">
+                <button class="instant-download-btn" id="instantDownloadBtn">
+                    <i class="fas fa-download"></i>
+                    Download Now
+                </button>
+                <div class="email-info">
+                    <i class="fas fa-envelope"></i>
+                    <span>Download link sent to: <strong id="userEmailDisplay"></strong></span>
+                </div>
+            </div>
+            <button class="close-success">Continue Browsing</button>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About WallpaperHub</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We curate the finest collection of wallpapers for your devices. Our mission is to provide high-quality, stunning visuals that transform your digital experience.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-hd-video"></i>
+                            <span>4K Quality</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-download"></i>
+                            <span>Free Downloads</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>All Devices</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <i class="fas fa-image"></i>
+                    <span>WallpaperHub</span>
+                </div>
+                <p>&copy; 2024 WallpaperHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
